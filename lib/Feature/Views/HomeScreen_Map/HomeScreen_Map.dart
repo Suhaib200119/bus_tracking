@@ -132,10 +132,10 @@ class HomeScreen_Map extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: GoogleMap(
-          mapType: MapType.hybrid,
+          mapType: MapType.normal,
           initialCameraPosition: CameraPosition(
             target: LatLng(lat, lon),
-            zoom: 18.4746,
+            zoom: 10,
           ),
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
