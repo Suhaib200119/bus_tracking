@@ -28,14 +28,13 @@ class LineProvider extends ChangeNotifier {
   Future<BitmapDescriptor> _createMarkerIcon() async {
     const String assetName = 'Assets/images/bus_marker.png';
     return BitmapDescriptor.fromAssetImage(
-      const ImageConfiguration(size: Size(10, 10)), // Desired size of the marker icon
+      const ImageConfiguration(size: Size(10, 10)),
       assetName,
     );
   }
   late double lat;
   late double lon;
   HashSet<Marker> markers = HashSet<Marker>();
-
   bool haspermission = false;
   late LocationPermission permission;
   checkGpsAndGetCurrentLocation(BuildContext context) async {
