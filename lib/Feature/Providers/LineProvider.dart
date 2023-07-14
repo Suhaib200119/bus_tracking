@@ -26,7 +26,7 @@ class LineProvider extends ChangeNotifier {
   }
 
   Future<BitmapDescriptor> _createMarkerIcon() async {
-    const String assetName = 'Assets/images/bus_marker.jpg';
+    const String assetName = 'Assets/images/bus_marker.png';
     return BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(size: Size(10, 10)), // Desired size of the marker icon
       assetName,
