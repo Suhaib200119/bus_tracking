@@ -1,3 +1,6 @@
+import 'package:bus_tracing/Feature/Views/PublicScreen/Screens/BusesScreen.dart';
+import 'package:bus_tracing/Feature/Views/PublicScreen/Screens/CentersScreen.dart';
+import 'package:bus_tracing/Feature/Views/PublicScreen/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 
 class GlobalProvider extends ChangeNotifier{
@@ -6,6 +9,35 @@ class GlobalProvider extends ChangeNotifier{
     this.defaultLang=defaultLang;
     notifyListeners();
   }
+  List<Widget> items=[
+    Icon(Icons.directions_bus_filled, size: 30,color: Colors.white,),
+    Icon(Icons.home, size: 30,color: Colors.white,),
+    Icon(Icons.center_focus_strong, size: 30,color: Colors.white,),
+    Icon(Icons.exit_to_app, size: 30,color: Colors.white,),
 
+  ];
+  List<Widget> screens=[
+      BusesScreen(),
+     HomeScreen(),
+     CentersScreen(),
+  ];
+
+  int bottomNavigationBarIndex=1;
+  void changeBottomNavigationBar(int newValue){
+    this.bottomNavigationBarIndex=newValue;
+    notifyListeners();
+  }
+
+  int currentPageViewIndex=0;
+void changeCurrentPageViewIndex(int newValue){
+  this.currentPageViewIndex=newValue;
+  notifyListeners();
+}
+
+int countSmoothPageIndicator=1;
+void changeCountSmoothPageIndicator(int newValue){
+  this.countSmoothPageIndicator=newValue;
+  notifyListeners();
+}
 
 }
