@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../Core/ColorsManager.dart';
+import '../../../GlobalWidgets/CardData_C.dart';
 import '../../../Providers/GlobalProvider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,47 +50,13 @@ class HomeScreen extends StatelessWidget {
                             globalProvider.changeCurrentPageViewIndex(index);
                           },
                           itemBuilder: (context, index) {
-                            return Container(
-                              padding: EdgeInsets.all(8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${data[index]["bus"]["company"]["name"]} company",
-                                    style: GoogleFonts.cairo(
-                                      color: ColorsManager.primaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(
-                                      "Assets/images/bus.png",
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 200,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Text(
-                                    data[index]["bus"]["name"],
-                                    style: GoogleFonts.cairo(
-                                      color: ColorsManager.primaryColor,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  Text(
-                                    data[index]["bus"]["number"],
-                                    style: GoogleFonts.cairo(
-                                      color: ColorsManager.grayColor_2,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
+                            return CardData_C(
+                                busName: data[index]["bus"]["name"],
+                                busNumber: data[index]["bus"]["number"],
+                                busCompany: data[index]["bus"]["company"]
+                                    ["name"],
+                                busImage: "Assets/images/bus.png",
+                                index: index);
                           },
                         );
                       } else {
@@ -154,13 +121,13 @@ class HomeScreen extends StatelessWidget {
                       globalProvider.changeBottomNavigationBar(2);
                     },
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.asset(
-                          "Assets/images/map.png",
-                          width: 200,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        "Assets/images/map.png",
+                        width: 200,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
