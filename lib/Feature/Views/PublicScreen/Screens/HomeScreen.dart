@@ -38,9 +38,6 @@ class HomeScreen extends StatelessWidget {
                           jsonDecode(snapshot.data.toString());
                       if (snapshotData["status"]) {
                         List<dynamic> data = snapshotData["data"];
-                        globalProvider
-                            .changeCountSmoothPageIndicator(data.length);
-                        // print("data: ${data}");
                         return PageView.builder(
                           allowImplicitScrolling: true,
                           controller: _pageController,
@@ -108,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.asset(
-                        "Assets/images/markerButon.jpg",
+                        "Assets/images/markerButton.jpg",
                         width: 200,
                         height: 200,
                       ),

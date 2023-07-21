@@ -3,6 +3,8 @@ import 'package:bus_tracing/Feature/Views/PublicScreen/Screens/CentersScreen.dar
 import 'package:bus_tracing/Feature/Views/PublicScreen/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 
+import '../../Network/dioHelper.dart';
+
 class GlobalProvider extends ChangeNotifier{
   String defaultLang="ar";
   void change_default_lang(String defaultLang){
@@ -34,10 +36,15 @@ void changeCurrentPageViewIndex(int newValue){
   notifyListeners();
 }
 
-int countSmoothPageIndicator=1;
-void changeCountSmoothPageIndicator(int newValue){
-  this.countSmoothPageIndicator=newValue;
-  notifyListeners();
+
+  int countSmoothPageIndicator=0;
+getLength(){
+  DioHelper.getMethod(
+      apiName: "Home/GetActiveLine", headers: {}).then((value){
+                List<dynamic> data=value.data["data"];
+               countSmoothPageIndicator=data.length;
+                notifyListeners();
+  });
 }
 
 }

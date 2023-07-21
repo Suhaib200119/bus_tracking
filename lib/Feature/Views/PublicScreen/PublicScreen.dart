@@ -19,11 +19,11 @@ class PublicScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Spacer(),
-            Spacer(),
+            const Spacer(),
+            const Spacer(),
             Container(
-              color: Color(0xffF3F3F3),
-              padding: EdgeInsets.all(4),
+              color: const Color(0xffF3F3F3),
+              padding:const EdgeInsets.all(4),
               width: MediaQuery.of(context).size.width,
               child: Row(
                 children: [
@@ -47,7 +47,6 @@ class PublicScreen extends StatelessWidget {
                   Expanded(
                     child: Button_C(
                       function: () {
-                        print("Public");
                       },
                       btn_title: "Public",
                       fontColor: ColorsManager.grayColor,
@@ -68,7 +67,7 @@ class PublicScreen extends StatelessWidget {
                   color: ColorsManager.primaryColor),
             ),
             Text(
-              "Premium and prestige bus daily rental. Experience the thrill at a lower price",
+              "Premium and prestige bus daily rental.Experience the thrill at a lower price",
               style: GoogleFonts.cairo(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,

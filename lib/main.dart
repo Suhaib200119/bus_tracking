@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx) {
-          return GlobalProvider();
+          return GlobalProvider()..getLength();
         }),
         ChangeNotifierProvider(create: (ctx) {
           return AuthProvider();
