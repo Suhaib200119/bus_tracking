@@ -48,6 +48,8 @@ class AuthProvider extends ChangeNotifier {
           ));
         });
       } else {
+        login_btn_is_click = false;
+        notifyListeners();
         showDialog(
           context: context,
           builder: (context) {
@@ -57,10 +59,13 @@ class AuthProvider extends ChangeNotifier {
       }
 
     }).catchError((onError) {
+      login_btn_is_click = false;
+      notifyListeners();
       showDialog(
         context: context,
         builder: (context) {
           return Dialog_C(message: "some error , try later");
+
         },
       );
     });
