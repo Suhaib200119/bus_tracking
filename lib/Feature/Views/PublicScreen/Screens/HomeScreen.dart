@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                                 busNumber: data[index]["bus"]["number"],
                                 busCompany: data[index]["bus"]["company"]
                                     ["name"],
-                                busImage: "Assets/images/bus.png",
+                                busImage:data[index]["bus"]["imgPath"],
                                 index: index);
                           },
                         );

@@ -37,6 +37,44 @@ class CentersScreen extends StatelessWidget {
                   itemCount: data.length,
                   itemBuilder: (context, index) {
                     return MaterialButton(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: ColorsManager.grayColor,
+                        ),
+                        child: Row(
+                          children: [
+                            Image.asset("Assets/images/markerButton.jpg",width: 100,height: 100,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width/1.5,
+                                  child: Text(
+                                    "${data[index]["name"]}",
+                                    softWrap: true,
+                                    maxLines: 3,
+                                    style: GoogleFonts.cairo(
+                                      color: ColorsManager.primaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+
+                                  ),
+                                ),
+                                Text(
+                                  "${data[index]["address"]}",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.cairo(
+                                    color: ColorsManager.primaryColor,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       onPressed: () {
                         showModalBottomSheet(
                           backgroundColor: Colors.transparent,
@@ -71,7 +109,7 @@ class CentersScreen extends StatelessWidget {
                                                 maxLines: 2,
                                                 style: GoogleFonts.cairo(
                                                     fontSize:
-                                                    24,
+                                                    20,
                                                     fontWeight: FontWeight
                                                         .w700,
                                                     color: ColorsManager.whiteColor),
@@ -116,142 +154,180 @@ class CentersScreen extends StatelessWidget {
                                             topLeft: Radius.circular(40),
                                             topRight: Radius.circular(40)),
                                       ),
-                                      child: Expanded(
-                                        child: FutureBuilder(
-                                          future: DioHelper.getMethod(
-                                              apiName:
-                                              "StopPoint/Get/${data[index]["id"]}",
-                                              headers: {}),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              dynamic snapshotData =
-                                              jsonDecode(snapshot.data
-                                                  .toString());
-                                              if (snapshotData["status"]) {
-                                                List<dynamic> data =
-                                                snapshotData["data"]
-                                                ["lineSP"];
-                                                if (data.isNotEmpty) {
-                                                  return ListView.builder(
-                                                    itemCount: data.length,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      Color color = data[
-                                                      index]
-                                                      [
-                                                      "isAccess"] ==
-                                                          true
-                                                          ? ColorsManager
-                                                          .grayColor_2
-                                                          : ColorsManager
-                                                          .primaryColor;
-                                                      Color colorAvatar = data[
-                                                      index]
-                                                      [
-                                                      "isAccess"] ==
-                                                          true
-                                                          ? ColorsManager
-                                                          .grayColor_2
-                                                          : ColorsManager
-                                                          .orangeColor;
+                                      child: FutureBuilder(
+                                        future: DioHelper.getMethod(
+                                            apiName:
+                                            "StopPoint/Get/${data[index]["id"]}",
+                                            headers: {}),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            dynamic snapshotData =
+                                            jsonDecode(snapshot.data
+                                                .toString());
+                                            if (snapshotData["status"]) {
+                                              List<dynamic> lineSP =
+                                              snapshotData["data"]
+                                              ["lineSP"];
 
-                                                      Color colorTrue = data[
-                                                      index]
-                                                      [
-                                                      "isAccess"] ==
-                                                          true
-                                                          ? ColorsManager
-                                                          .grayColor_2
-                                                          : Colors.green;
+                                              print(data[index]["id"]);
+                                              print(lineSP);
+                                              if (data.isNotEmpty) {
+                                                return Expanded(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(top: 24),
+                                                    child: ListView.builder(
+                                                      itemCount: lineSP.length,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        Color color = lineSP[
+                                                        index]
+                                                        [
+                                                        "isAccess"] ==
+                                                            true
+                                                            ? ColorsManager
+                                                            .grayColor_2
+                                                            : ColorsManager
+                                                            .primaryColor;
+                                                        Color colorAvatar = lineSP[
+                                                        index]
+                                                        [
+                                                        "isAccess"] ==
+                                                            true
+                                                            ? ColorsManager
+                                                            .grayColor_2
+                                                            : ColorsManager
+                                                            .orangeColor;
 
-                                                      return Container(
-                                                        padding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal:
-                                                            4),
-                                                        height: 100,
-                                                        child: Row(
-                                                          children: [
-                                                            CircleAvatar(
-                                                              backgroundColor:
-                                                              colorAvatar,
-                                                              child: Icon(
-                                                                Icons
-                                                                    .directions_bus,
-                                                                color: ColorsManager
-                                                                    .whiteColor,
+                                                        Color colorTrue = lineSP[
+                                                        index]
+                                                        [
+                                                        "isAccess"] ==
+                                                            true
+                                                            ? ColorsManager
+                                                            .grayColor_2
+                                                            : Colors.green;
+
+                                                        return Container(
+                                                          padding:
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                              horizontal:
+                                                              4),
+                                                          // height: 100,
+                                                          child: Row(
+                                                            children: [
+                                                              // CircleAvatar(
+                                                              //   backgroundColor:
+                                                              //   colorAvatar,
+                                                              //   child: Icon(
+                                                              //     Icons
+                                                              //         .directions_bus,
+                                                              //     color: ColorsManager
+                                                              //         .whiteColor,
+                                                              //   ),
+                                                              // ),
+                                                              // const SizedBox(
+                                                              //   width: 16,
+                                                              // ),
+                                                              Image.network(
+                                                                lineSP[index]["imgPath"],
+                                                                width: 150,
+                                                                 height: 150,
+                                                                fit: BoxFit.cover,
+
                                                               ),
-                                                            ),
-                                                            const SizedBox(
-                                                              width: 16,
-                                                            ),
-                                                            Column(
-                                                              mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                              crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                              children: [
-                                                                Text(
-                                                                  "${data[index]["stopPointName"]}",
-                                                                  style: GoogleFonts.cairo(
-                                                                      fontSize:
-                                                                      18,
-                                                                      fontWeight: FontWeight
-                                                                          .w700,
-                                                                      color:
-                                                                      color),
-                                                                ),
-                                                                Text(
-                                                                  "${data[index]["timeAccess"]}",
-                                                                  style: GoogleFonts.cairo(
-                                                                      fontSize:
-                                                                      20,
-                                                                      fontWeight: FontWeight
-                                                                          .w700,
-                                                                      color:
-                                                                      color),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Spacer(),
-                                                            Padding(
-                                                              padding: const EdgeInsets.only(right: 20),
-                                                              child: Icon(Icons.check,size: 22,color: colorTrue),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                }
-                                                else {
-                                                  return const Center(
-                                                      child:
-                                                      Text("No Data - Empty"));
-                                                }
-                                              } else {
-                                                return const Center(child: Text("Status - false"));
+                                                              Spacer(),
+                                                              Column(
+                                                                mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                                crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                                children: [
+                                                                  Text(
+                                                                    "${lineSP[index]["busCompany"]}",
+
+                                                                    style: GoogleFonts.cairo(
+                                                                        fontSize:
+                                                                        18,
+                                                                        fontWeight: FontWeight
+                                                                            .w700,
+                                                                        color:
+                                                                        color),
+                                                                  ),
+                                                                  Text(
+                                                                    "${lineSP[index]["busNumber"]}",
+                                                                    style: GoogleFonts.cairo(
+                                                                        fontSize:
+                                                                        20,
+                                                                        fontWeight: FontWeight
+                                                                            .w700,
+                                                                        color:
+                                                                        color),
+                                                                  ),
+                                                                  ClipRRect(
+                                                                    borderRadius: BorderRadius.circular(4),
+                                                                    child: Container(
+                                                                      color: ColorsManager.primaryColor,
+                                                                      padding: EdgeInsets.symmetric(horizontal: 20),
+                                                                      child: Row(
+                                                                        children: [
+                                                                          Icon(Icons.access_alarm,color: ColorsManager.whiteColor,),
+                                                                          SizedBox(width: 8,),
+                                                                          Text(
+                                                                            "${lineSP[index]["timeAccess"]}",
+                                                                            style: GoogleFonts.cairo(
+                                                                                fontSize:
+                                                                                20,
+                                                                                fontWeight: FontWeight
+                                                                                    .w700,
+                                                                                color:
+                                                                                ColorsManager.whiteColor),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Spacer(),
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(right: 20),
+                                                                child: Icon(Icons.check,size: 22,color: colorTrue),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                );
                                               }
-                                            } else if (snapshot
-                                                .connectionState ==
-                                                ConnectionState.waiting) {
-                                              return Center(
-                                                child:
-                                                LoadingAnimationWidget
-                                                    .staggeredDotsWave(
-                                                  color: ColorsManager
-                                                      .primaryColor,
-                                                  size: 50,
-                                                ),
-                                              );
+                                              else {
+                                                return const Center(
+                                                    child:
+                                                    Text("No Data - Empty"));
+                                              }
                                             } else {
-                                              return Text("Somw ERRPR");
+                                              return const Center(child: Text("Status - false"));
                                             }
-                                          },
-                                        ),
+                                          } else if (snapshot
+                                              .connectionState ==
+                                              ConnectionState.waiting) {
+                                            return Center(
+                                              child:
+                                              LoadingAnimationWidget
+                                                  .staggeredDotsWave(
+                                                color: ColorsManager
+                                                    .primaryColor,
+                                                size: 50,
+                                              ),
+                                            );
+                                          } else {
+                                            return const Text("Some ERROR");
+                                          }
+                                        },
                                       ),
                                     ),
                                   ),
@@ -261,44 +337,7 @@ class CentersScreen extends StatelessWidget {
                           },
                         );
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: ColorsManager.grayColor,
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset("Assets/images/markerButton.jpg",width: 100,height: 100,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width/1.5,
-                                  child: Text(
-                                    "${data[index]["name"]}",
-                                    softWrap: true,
-                                    maxLines: 3,
-                                    style: GoogleFonts.cairo(
-                                      color: ColorsManager.primaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
 
-                                  ),
-                                ),
-                                Text(
-                                  "${data[index]["address"]}",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.cairo(
-                                    color: ColorsManager.primaryColor,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
                     );
                   },
                 );

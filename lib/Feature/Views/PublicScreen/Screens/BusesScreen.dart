@@ -113,8 +113,8 @@ class BusesScreen extends StatelessWidget {
                                                         Radius.circular(40),
                                                     topLeft:
                                                         Radius.circular(40)),
-                                            child: Image.asset(
-                                              "Assets/images/bus.png",
+                                            child: Image.network(
+                                              data[index]["bus"]["imgPath"],
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
@@ -200,15 +200,20 @@ class BusesScreen extends StatelessWidget {
                                                                       CrossAxisAlignment
                                                                           .start,
                                                                   children: [
-                                                                    Text(
-                                                                      "${data[index]["stopPointName"]}",
-                                                                      style: GoogleFonts.cairo(
-                                                                          fontSize:
-                                                                              18,
-                                                                          fontWeight: FontWeight
-                                                                              .w700,
-                                                                          color:
-                                                                              color),
+                                                                    Container(
+                                                                      width: MediaQuery.of(context).size.width/1.5,
+                                                                      child: Text(
+                                                                        "${data[index]["stopPointName"]}",
+                                                                        softWrap: true,
+                                                                        maxLines: 1,
+                                                                        style: GoogleFonts.cairo(
+                                                                            fontSize:
+                                                                                18,
+                                                                            fontWeight: FontWeight
+                                                                                .w700,
+                                                                            color:
+                                                                                color),
+                                                                      ),
                                                                     ),
                                                                     Text(
                                                                       "${data[index]["timeAccess"]}",
@@ -273,7 +278,7 @@ class BusesScreen extends StatelessWidget {
                           busName: data[index]["bus"]["name"],
                           busNumber: data[index]["bus"]["number"],
                           busCompany: data[index]["bus"]["company"]["name"],
-                          busImage: "Assets/images/bus.png",
+                          busImage: data[index]["bus"]["imgPath"],
                           index: index),
                     );
                   },

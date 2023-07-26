@@ -34,7 +34,7 @@ class CardData_C extends StatelessWidget {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
+            child: Image.network(
               busImage,
               width: MediaQuery.of(context).size.width,
               height: 200,
